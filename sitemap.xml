@@ -3,19 +3,25 @@
 
 <url>
     <loc>https://kyokke.github.io/404/index.html</loc>
-    <lastmod>2021-01-07</lastmod>
+    <lastmod>2021-02-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://kyokke.github.io/index.html</loc>
-    <lastmod>2021-01-07</lastmod>
+    <lastmod>2021-02-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
 <url>
     <loc>https://kyokke.github.io/blog/2021-01-07-rabbit-challenge-application/index.html</loc>
-    <lastmod>2021-01-07</lastmod>
+    <lastmod>2021-02-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+</url>
+<url>
+    <loc>https://kyokke.github.io/blog/2021-02-07-rabbit-start-test/index.html</loc>
+    <lastmod>2021-02-07</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.5</priority>
 </url>
