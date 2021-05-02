@@ -171,6 +171,8 @@ Phase.2 機械学習のレポート提出を兼ねた受講記録です。
 
 ## ロジスティック回帰
 
+\textinput{skl_logistic_regression.md}
+
 ### 動画講義メモ(要点のまとめ)
 
 \textinput{np_regression.md}
