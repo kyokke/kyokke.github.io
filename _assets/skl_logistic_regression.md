@@ -1,6 +1,6 @@
 ### ハンズオン
 
-#### 0. データ読み込み & 前処理
+#### データ読み込み & 前処理
 
 
 ```python
@@ -490,7 +490,7 @@ titanic_df[titanic_df.isnull().any(1)]
 ~~~
 
 
-#### 1. 実装(チケット価格から生死を判別)
+#### 実装(チケット価格から生死を判別)
 
 
 ```python
@@ -568,7 +568,7 @@ plt.show()
     
 
 
-#### 2. 実装(2変数から生死を判別)
+#### 実装(2変数から生死を判別)
 
 ただ変数を増やすだけでなく、特徴量エンジニアリングを経験するのがポイント
 
@@ -1122,20 +1122,11 @@ ax.plot([x1, x2] ,[y1, y2], 'y--', label="decision boundary(numpy)")
 ax.legend(bbox_to_anchor=(1.0, 1.0))
 ```
 
-
-
-
-    <matplotlib.legend.Legend at 0x7f5cc0f6eb50>
-
-
-
-
-    
 ![svg](/assets/skl_logistic_regression_files/skl_logistic_regression_21_1.svg)
     
 
 
-### モデル評価
+#### モデル評価
 
 ここでは sklearn, seaborn などを使ったモデル評価の方法をいくつか使ってみる。
 可視化はおまけ、ということなので、何をやってるか簡単に理解するにとどめておく。
