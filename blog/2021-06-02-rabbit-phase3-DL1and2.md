@@ -3,7 +3,7 @@
 @def tags = [ "Deep-Learning", "Rabbit-Challenge" ]
 
 
-# ラビットチャレンジ: Stage.3 Day1, 2  
+# ラビットチャレンジ: Stage.3 深層学習 Day1, 2  
 
 本ページはラビットチャレンジの、
 Stage.3 "深層学習 Day1,2" のレポート提出を兼ねた受講記録です。
