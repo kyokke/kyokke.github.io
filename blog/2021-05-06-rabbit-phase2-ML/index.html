@@ -101,13 +101,13 @@ price = model.predict(sample)[<span class=hljs-number >0</span>]
 intercept: -34.670620776438554
 price: -25.568511795258246</p>
 <pre><code class="python hljs"><span class=hljs-comment ># numpy実装の回帰 (とりあえず 1次元前提の実装)</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >train</span>(<span class=hljs-params >xs, ys</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">train</span>(<span class=hljs-params >xs, ys</span>):
     cov = np.cov(xs, ys, ddof=<span class=hljs-number >0</span>)
     a = cov[<span class=hljs-number >0</span>, <span class=hljs-number >1</span>] / cov[<span class=hljs-number >0</span>, <span class=hljs-number >0</span>]
     b = np.mean(ys) - a * np.mean(xs)
     <span class=hljs-keyword >return</span> cov, a, b
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >predict</span>(<span class=hljs-params >x,a,b</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">predict</span>(<span class=hljs-params >x,a,b</span>):
     <span class=hljs-keyword >return</span> a * x + b
 
 _,  a1, b1 = train(data[:,<span class=hljs-number >0</span>], target)
@@ -145,12 +145,12 @@ intercept: -29.24471945192992
 predict: 29.43977562281461</p>
 <pre><code class="python hljs"><span class=hljs-comment ># numpy実装の回帰 (N次元の実装)</span>
 <span class=hljs-comment ># 普通に行列で微分すればOK</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >train</span>(<span class=hljs-params >xs, ys</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">train</span>(<span class=hljs-params >xs, ys</span>):
     X = np.concatenate([np.ones((xs.shape[<span class=hljs-number >0</span>],<span class=hljs-number >1</span>), dtype=np.float64),xs],<span class=hljs-number >1</span>)
     w = np.dot( np.linalg.pinv(X), ys)
     <span class=hljs-keyword >return</span> w
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >predict</span>(<span class=hljs-params >x, w</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">predict</span>(<span class=hljs-params >x, w</span>):
     X = np.concatenate([np.ones((x.shape[<span class=hljs-number >0</span>],<span class=hljs-number >1</span>), dtype=np.float64),x],<span class=hljs-number >1</span>)
     <span class=hljs-keyword >return</span> np.dot(X,w)
 
@@ -172,7 +172,7 @@ price: &#91;29.43977562&#93;</p>
 <span class=hljs-built_in >print</span>(<span class=hljs-string >&#x27;単回帰決定係数: %.3f, 重回帰決定係数 : %.3f&#x27;</span> % (model.score(data,target), model2.score(data2,target2)))</code></pre>
 <p>単回帰決定係数: 0.484, 重回帰決定係数 : 0.542</p>
 <p>オリジナルのノートブックには、単回帰に関する検証しか行われていないので、重回帰でも行う</p>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >evaluate</span>(<span class=hljs-params >data,target</span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">evaluate</span>(<span class=hljs-params >data,target</span>):
     <span class=hljs-keyword >from</span> sklearn.model_selection <span class=hljs-keyword >import</span> train_test_split
 
     <span class=hljs-comment ># 70%を学習用、30%を検証用データにするよう分割</span>
@@ -379,11 +379,11 @@ sns.set_style(<span class=hljs-string >&quot;darkgrid&quot;</span>, {<span class
 <span class=hljs-comment >#大きさ(スケール変更)</span>
 sns.set_context(<span class=hljs-string >&quot;paper&quot;</span>)</code></pre>
 <pre><code class="python hljs">n=<span class=hljs-number >100</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >true_func</span>(<span class=hljs-params >x</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">true_func</span>(<span class=hljs-params >x</span>):
     z = <span class=hljs-number >1</span>-<span class=hljs-number >48</span>*x+<span class=hljs-number >218</span>*x**<span class=hljs-number >2</span>-<span class=hljs-number >315</span>*x**<span class=hljs-number >3</span>+<span class=hljs-number >145</span>*x**<span class=hljs-number >4</span>
     <span class=hljs-keyword >return</span> z 
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >linear_func</span>(<span class=hljs-params >x</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">linear_func</span>(<span class=hljs-params >x</span>):
     z = x
     <span class=hljs-keyword >return</span> z</code></pre>
 <pre><code class="python hljs"><span class=hljs-comment ># 真の関数からノイズを伴うデータを生成</span>
@@ -607,7 +607,7 @@ x_train, x_test, y_train, y_test = train_test_split(data, target, test_size=<spa
 
 cb_cp = ModelCheckpoint(<span class=hljs-string >&#x27;./out/checkpoints/weights.{epoch:02d}-{val_loss:.2f}.hdf5&#x27;</span>, verbose=<span class=hljs-number >1</span>, save_weights_only=<span class=hljs-literal >True</span>)
 cb_tf  = TensorBoard(log_dir=<span class=hljs-string >&#x27;./out/tensorBoard&#x27;</span>, histogram_freq=<span class=hljs-number >0</span>)</code></pre>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >relu_reg_model</span>():</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">relu_reg_model</span>():
     model = Sequential()
     model.add(Dense(<span class=hljs-number >10</span>, input_dim=<span class=hljs-number >1</span>, activation=<span class=hljs-string >&#x27;relu&#x27;</span>))
     model.add(Dense(<span class=hljs-number >1000</span>, activation=<span class=hljs-string >&#x27;relu&#x27;</span>))
@@ -1351,7 +1351,7 @@ X_test_value = model.decision_function(data1)
 w_0 = model.intercept_[<span class=hljs-number >0</span>]
 w_1 = model.coef_[<span class=hljs-number >0</span>,<span class=hljs-number >0</span>]
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >sigmoid</span>(<span class=hljs-params >x</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">sigmoid</span>(<span class=hljs-params >x</span>):
     <span class=hljs-keyword >return</span> <span class=hljs-number >1</span> / (<span class=hljs-number >1</span>+np.exp(-(w_1*x+w_0)))
 
 x_range = np.linspace(-<span class=hljs-number >1</span>, <span class=hljs-number >500</span>, <span class=hljs-number >3000</span>)
@@ -1670,15 +1670,15 @@ model2.fit(data2, label2[:,<span class=hljs-number >0</span>])
 &#91;0&#93;
 &#91;&#91;0.78415473 0.21584527&#93;&#93;</p>
 <pre><code class="python hljs"><span class=hljs-comment ># numpy 実装</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >add_one</span>(<span class=hljs-params >x</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">add_one</span>(<span class=hljs-params >x</span>):
     <span class=hljs-keyword >return</span> np.concatenate([np.ones(<span class=hljs-built_in >len</span>(x))[:, <span class=hljs-literal >None</span>], x], axis=<span class=hljs-number >1</span>)
 
 <span class=hljs-comment ># overflow,underflow 対策 のため素直な実装はしない</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >sigmoid</span>(<span class=hljs-params >x</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">sigmoid</span>(<span class=hljs-params >x</span>):
     <span class=hljs-keyword >return</span> (np.tanh(x/<span class=hljs-number >2</span>) + <span class=hljs-number >1</span>)/<span class=hljs-number >2</span>
 
 <span class=hljs-comment ># うまく収束しているかどうか確認するための loss計算</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >loss</span>(<span class=hljs-params >X,y,w</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">loss</span>(<span class=hljs-params >X,y,w</span>):
     yhat = sigmoid(np.dot(X,w))
     <span class=hljs-comment ># これだと、yhat = 0,1の時にエラーがでる。</span>
     <span class=hljs-comment ># temp = y * np.log(yhat) + (1-y) * np.log(1-yhat)</span>
@@ -1686,7 +1686,7 @@ model2.fit(data2, label2[:,<span class=hljs-number >0</span>])
     <span class=hljs-keyword >return</span> -<span class=hljs-built_in >sum</span>(temp)/<span class=hljs-built_in >len</span>(temp)
 
 <span class=hljs-comment ># バッチの共役勾配法</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >sgd</span>(<span class=hljs-params >X_train, y_train, max_iter, eta</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">sgd</span>(<span class=hljs-params >X_train, y_train, max_iter, eta</span>):
     <span class=hljs-comment ># w = np.random.rand(X_train.shape[1])</span>
     w = np.zeros(X_train.shape[<span class=hljs-number >1</span>])
     <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(max_iter):
@@ -1926,7 +1926,7 @@ predictor_eval2=eval_model2.fit(traindata2, trainlabel2[:,<span class=hljs-numbe
         accuracy                           <span class=hljs-number >0.82</span>       <span class=hljs-number >179</span>
        <span class=hljs-keyword >macro</span> avg       <span class=hljs-number >0.82</span>      <span class=hljs-number >0.80</span>      <span class=hljs-number >0.81</span>       <span class=hljs-number >179</span>
     weighted avg       <span class=hljs-number >0.82</span>      <span class=hljs-number >0.82</span>      <span class=hljs-number >0.82</span>       <span class=hljs-number >179</span></code></pre>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >plot_confusion_matrix</span>(<span class=hljs-params >cm,title</span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">plot_confusion_matrix</span>(<span class=hljs-params >cm,title</span>):
     fig = plt.figure(figsize = (<span class=hljs-number >7</span>,<span class=hljs-number >7</span>))
     plt.title(title)
     sns.heatmap(
@@ -2762,17 +2762,17 @@ Text&#40;0, 0.5, &#39;PC 2&#39;&#41;</p>
 <pre><code class="python hljs"><span class=hljs-comment ># PCA の numpy 実装をためしてみる</span>
 n_components=<span class=hljs-number >2</span>
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >get_moments</span>(<span class=hljs-params >X</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">get_moments</span>(<span class=hljs-params >X</span>):
     mean = X.mean(axis=<span class=hljs-number >0</span>)
     stan_cov = np.dot((X - mean).T, X - mean) / (<span class=hljs-built_in >len</span>(X) - <span class=hljs-number >1</span>)
     <span class=hljs-keyword >return</span> mean, stan_cov
     
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >get_components</span>(<span class=hljs-params >eigenvectors, n_components</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">get_components</span>(<span class=hljs-params >eigenvectors, n_components</span>):
     <span class=hljs-comment ># 固有ベクトル・固有値両方 昇順なので、逆転させるてから、取り出す</span>
     W = eigenvectors[:, ::-<span class=hljs-number >1</span>][:, :n_components]
     <span class=hljs-keyword >return</span> W.T
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >transform_by_pca</span>(<span class=hljs-params >X, pca</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">transform_by_pca</span>(<span class=hljs-params >X, pca</span>):
     mean = X.mean(axis=<span class=hljs-number >0</span>)
     <span class=hljs-keyword >return</span> np.dot(X-mean, pca)
 
@@ -3298,7 +3298,7 @@ df.head()</code></pre>
 y=wine.target
 
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=<span class=hljs-number >0.3</span>, random_state=<span class=hljs-number >55</span>)</code></pre>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >species_label</span>(<span class=hljs-params >theta</span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">species_label</span>(<span class=hljs-params >theta</span>):
     <span class=hljs-keyword >if</span> theta == <span class=hljs-number >0</span>:
         <span class=hljs-keyword >return</span> wine.target_names[<span class=hljs-number >0</span>]
     <span class=hljs-keyword >if</span> theta == <span class=hljs-number >1</span>:
@@ -3310,7 +3310,7 @@ X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=<span class=hl
 y_label = [species_label(theta) <span class=hljs-keyword >for</span> theta <span class=hljs-keyword >in</span> wine.target]
 df[<span class=hljs-string >&#x27;species&#x27;</span>]=y_label</code></pre>
 <p>&#91;&#39;class_0&#39; &#39;class_1&#39; &#39;class_2&#39;&#93;</p>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >plot_confusion_matrix</span>(<span class=hljs-params >cm,title</span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">plot_confusion_matrix</span>(<span class=hljs-params >cm,title</span>):
     fig = plt.figure(figsize = (<span class=hljs-number >7</span>,<span class=hljs-number >7</span>))
     plt.title(title)
     sns.heatmap(
@@ -3336,10 +3336,10 @@ df[<span class=hljs-string >&#x27;species&#x27;</span>]=y_label</code></pre>
 <p>k-nn は学習のプロセスは無いが、識別のために事前にクラスが判明しているサンプルが必要。上で分割したデータを使って試してみる。 つまり、X<em>train, y</em>train の情報を用いて、X_test の各サンプルのクラスを判別する。</p>
 <pre><code class="python hljs"><span class=hljs-keyword >from</span> scipy <span class=hljs-keyword >import</span> stats
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >distance</span>(<span class=hljs-params >x1, x2</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">distance</span>(<span class=hljs-params >x1, x2</span>):
     <span class=hljs-keyword >return</span> np.<span class=hljs-built_in >sum</span>((x1 - x2)**<span class=hljs-number >2</span>, axis=<span class=hljs-number >1</span>)
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >knc_predict</span>(<span class=hljs-params >n_neighbors, x_train, y_train, X_test</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">knc_predict</span>(<span class=hljs-params >n_neighbors, x_train, y_train, X_test</span>):
     y_pred = np.empty(<span class=hljs-built_in >len</span>(X_test), dtype=y_train.dtype)
     <span class=hljs-keyword >for</span> i, x <span class=hljs-keyword >in</span> <span class=hljs-built_in >enumerate</span>(X_test):
         distances = distance(x, X_train)
@@ -3430,14 +3430,14 @@ pd.crosstab(df[<span class=hljs-string >&#x27;species_sklearn&#x27;</span>], df[
 <span class=hljs-comment ># distance 関数は k-nn で定義したものがそのまま使い回せる</span>
 <span class=hljs-comment >#  毎イタレーションで 配列を確保して速度的には効率が悪いが目をつぶる</span>
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >predict</span>(<span class=hljs-params >x, centers, n_clusters</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">predict</span>(<span class=hljs-params >x, centers, n_clusters</span>):
     D = np.zeros((<span class=hljs-built_in >len</span>(x), n_clusters))
     <span class=hljs-keyword >for</span> i, x <span class=hljs-keyword >in</span> <span class=hljs-built_in >enumerate</span>(x):
         D[i] = distance(x, centers)
         cluster_index = np.argmin(D, axis=<span class=hljs-number >1</span>)
     <span class=hljs-keyword >return</span> cluster_index
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >fit</span>(<span class=hljs-params >x, cluster_index, n_clusters</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">fit</span>(<span class=hljs-params >x, cluster_index, n_clusters</span>):
     centers = np.zeros( (n_clusters,x.shape[<span class=hljs-number >1</span>]) )
     <span class=hljs-comment ># 3) 各クラスタの平均ベクトル（中心）を計算する</span>
     <span class=hljs-keyword >for</span> k <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(n_clusters):
@@ -3690,7 +3690,7 @@ plot_confusion_matrix(confusion_matrix(y_test,y_pred_kmeans),<span class=hljs-st
 <span class=hljs-keyword >import</span> numpy <span class=hljs-keyword >as</span> np
 <span class=hljs-keyword >import</span> matplotlib.pyplot <span class=hljs-keyword >as</span> plt</code></pre>
 <h4 id="線形分離可能なケース"><a href="#線形分離可能なケース" class=header-anchor >線形分離可能なケース</a></h4>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >fit</span>(<span class=hljs-params >X_train, t, n_iter=<span class=hljs-number >500</span>,  eta1=<span class=hljs-number >0.01</span>, eta2=<span class=hljs-number >0.001</span>, C=<span class=hljs-number >0</span></span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">fit</span>(<span class=hljs-params >X_train, t, n_iter=<span class=hljs-number >500</span>,  eta1=<span class=hljs-number >0.01</span>, eta2=<span class=hljs-number >0.001</span>, C=<span class=hljs-number >0</span></span>):
     K = X_train.dot(X_train.T) 
     H = np.outer(t, t) * K
     n_samples = <span class=hljs-built_in >len</span>(t)
@@ -3726,13 +3726,13 @@ plot_confusion_matrix(confusion_matrix(y_test,y_pred_kmeans),<span class=hljs-st
 
     <span class=hljs-keyword >return</span> w, b, support_vectors
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >predict</span>(<span class=hljs-params >X,w,b</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">predict</span>(<span class=hljs-params >X,w,b</span>):
     y_project = np.zeros(<span class=hljs-built_in >len</span>(X))
     <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(X)):
          y_project[i] = w.dot(X[i]) + b
     <span class=hljs-keyword >return</span> np.sign(y_project), y_project</code></pre>
 <pre><code class="python hljs"><span class=hljs-comment ># (2,2) と (-2,-2) の周辺にランダムに点を発生させる</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >gen_data</span>():</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">gen_data</span>():
     x0 = np.random.normal(size=<span class=hljs-number >50</span>).reshape(-<span class=hljs-number >1</span>, <span class=hljs-number >2</span>) - <span class=hljs-number >2.</span>
     x1 = np.random.normal(size=<span class=hljs-number >50</span>).reshape(-<span class=hljs-number >1</span>, <span class=hljs-number >2</span>) + <span class=hljs-number >2.</span>
     X_train = np.concatenate([x0, x1])
@@ -3774,7 +3774,7 @@ plt.quiver(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>,
 <p><img src="/assets/np_svm_files/np_svm_5_1.svg" alt=SVG  /></p>
 <h4 id="線形分離不可能なケース"><a href="#線形分離不可能なケース" class=header-anchor >線形分離不可能なケース</a></h4>
 <p>元のデータ空間では線形分離は出来ないケースに対して、特徴空間上で線形分離することを考える。 今回はカーネルとしてRBFカーネル（ガウシアンカーネル）を利用する。</p>
-<pre><code class="python hljs"><span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >fit_k</span>(<span class=hljs-params >K, X_train, t, n_iter=<span class=hljs-number >500</span>,  eta1=<span class=hljs-number >0.01</span>, eta2=<span class=hljs-number >0.001</span></span>):</span>
+<pre><code class="python hljs"><span class=hljs-keyword >def</span> <span class="hljs-title function_">fit_k</span>(<span class=hljs-params >K, X_train, t, n_iter=<span class=hljs-number >500</span>,  eta1=<span class=hljs-number >0.01</span>, eta2=<span class=hljs-number >0.001</span></span>):
     n_samples = <span class=hljs-built_in >len</span>(t)
     eta1 = <span class=hljs-number >0.01</span>
     eta2 = <span class=hljs-number >0.001</span>
@@ -3802,7 +3802,7 @@ plt.quiver(<span class=hljs-number >0</span>, <span class=hljs-number >0</span>,
     <span class=hljs-keyword >return</span> a, b, support_vectors, support_vector_t, support_vector_a
 
 
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >predict_k</span>(<span class=hljs-params >X, b, support_vectors, support_vector_t, support_vector_a</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">predict_k</span>(<span class=hljs-params >X, b, support_vectors, support_vector_t, support_vector_a</span>):
     y_project = np.ones(<span class=hljs-built_in >len</span>(X)) * b
     <span class=hljs-keyword >for</span> i <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-built_in >len</span>(X)):
         <span class=hljs-keyword >for</span> a, sv_t, sv <span class=hljs-keyword >in</span> <span class=hljs-built_in >zip</span>(support_vector_a, support_vector_t, support_vectors):
@@ -3827,7 +3827,7 @@ x_train = X
 y_train = y
 
 <span class=hljs-comment ># RBFカーネルの計算</span>
-<span class=hljs-function ><span class=hljs-keyword >def</span> <span class=hljs-title >rbf</span>(<span class=hljs-params >u, v</span>):</span>
+<span class=hljs-keyword >def</span> <span class="hljs-title function_">rbf</span>(<span class=hljs-params >u, v</span>):
         sigma = <span class=hljs-number >0.8</span>
         <span class=hljs-keyword >return</span> np.exp(-<span class=hljs-number >0.5</span> * ((u - v)**<span class=hljs-number >2</span>).<span class=hljs-built_in >sum</span>() / sigma**<span class=hljs-number >2</span>)
 
@@ -4036,7 +4036,7 @@ plt.contour(xx0, xx1, y_project.reshape(<span class=hljs-number >100</span>, <sp
 <p>だんだん 8月に万全を期しての受験が厳しくなってきた気もするが、、淡々と進めていこう。</p>
 <div class=page-foot >
   <div class=copyright >
-    &copy; kyokke. Last modified: May 06, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    &copy; kyokke. Last modified: June 02, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>
