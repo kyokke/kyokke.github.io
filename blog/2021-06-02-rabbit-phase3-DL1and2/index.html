@@ -375,7 +375,7 @@ sys.path.append(<span class=hljs-string >&#x27;/.&#x27;</span>)</code></pre></p>
     activation: 活性化関数
     weight_init_std: 重みの初期化方法
     &#x27;&#x27;&#x27;</span>
-    <span class=hljs-keyword >def</span> __init__(self, input_size, hidden_size_list, output_size, activation=<span class=hljs-string >&#x27;relu&#x27;</span>, weight_init_std=<span class=hljs-string >&#x27;relu&#x27;</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, input_size, hidden_size_list, output_size, activation=<span class=hljs-string >&#x27;relu&#x27;</span>, weight_init_std=<span class=hljs-string >&#x27;relu&#x27;</span></span>):
         self.input_size = input_size
         self.output_size = output_size
         self.hidden_size_list = hidden_size_list
@@ -397,7 +397,7 @@ sys.path.append(<span class=hljs-string >&#x27;/.&#x27;</span>)</code></pre></p>
 
         self.last_layer = layers.SoftmaxWithLoss()
 
-    <span class=hljs-keyword >def</span> __init_weight(self, weight_init_std):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init_weight</span>(<span class=hljs-params >self, weight_init_std</span>):
         all_size_list = [self.input_size] + self.hidden_size_list + [self.output_size]
         <span class=hljs-keyword >for</span> idx <span class=hljs-keyword >in</span> <span class=hljs-built_in >range</span>(<span class=hljs-number >1</span>, <span class=hljs-built_in >len</span>(all_size_list)):
             scale = weight_init_std
@@ -602,7 +602,7 @@ sys.path.append(<span class=hljs-string >&#x27;.&#x27;</span>)</code></pre></p>
     running_mean: テスト時に使用する平均
     running_var: テスト時に使用する分散
     &#x27;&#x27;&#x27;</span>
-    <span class=hljs-keyword >def</span> __init__(self, gamma, beta, momentum=<span class=hljs-number >0.9</span>, running_mean=<span class=hljs-literal >None</span>, running_var=<span class=hljs-literal >None</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, gamma, beta, momentum=<span class=hljs-number >0.9</span>, running_mean=<span class=hljs-literal >None</span>, running_var=<span class=hljs-literal >None</span></span>):
         self.gamma = gamma
         self.beta = beta
         self.momentum = momentum
@@ -1402,7 +1402,7 @@ iters_num = <span class=hljs-number >1000</span>
 <p>0.05</p>
 <p><img src="/assets/2_5_overfiting_files/2_5_overfiting_8_5.svg" alt=svg  /></p>
 <pre><code class="python hljs"><span class=hljs-keyword >class</span> <span class="hljs-title class_">Dropout</span>:
-    <span class=hljs-keyword >def</span> __init__(self, dropout_ratio=<span class=hljs-number >0.5</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, dropout_ratio=<span class=hljs-number >0.5</span></span>):
         self.dropout_ratio = dropout_ratio
         self.mask = <span class=hljs-literal >None</span>
 
@@ -2038,7 +2038,7 @@ print_im2col_col2im( input_data , conv_param)</code></pre>
     =========================</code></pre>
 <pre><code class="python hljs"><span class=hljs-keyword >class</span> <span class="hljs-title class_">Convolution</span>:
     <span class=hljs-comment ># W: フィルター, b: バイアス</span>
-    <span class=hljs-keyword >def</span> __init__(self, W, b, stride=<span class=hljs-number >1</span>, pad=<span class=hljs-number >0</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, W, b, stride=<span class=hljs-number >1</span>, pad=<span class=hljs-number >0</span></span>):
         self.W = W
         self.b = b
         self.stride = stride
@@ -2092,7 +2092,7 @@ print_im2col_col2im( input_data , conv_param)</code></pre>
 
     
 <span class=hljs-keyword >class</span> <span class="hljs-title class_">Pooling</span>:
-    <span class=hljs-keyword >def</span> __init__(self, pool_h, pool_w, stride=<span class=hljs-number >1</span>, pad=<span class=hljs-number >0</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, pool_h, pool_w, stride=<span class=hljs-number >1</span>, pad=<span class=hljs-number >0</span></span>):
         self.pool_h = pool_h
         self.pool_w = pool_w
         self.stride = stride
@@ -2138,8 +2138,8 @@ print_im2col_col2im( input_data , conv_param)</code></pre>
 
 <span class=hljs-keyword >class</span> <span class="hljs-title class_">SimpleConvNet</span>:
     <span class=hljs-comment ># conv - relu - pool - affine - relu - affine - softmax</span>
-    <span class=hljs-keyword >def</span> __init__(self, input_dim=(<span class=hljs-number >1</span>, <span class=hljs-number >28</span>, <span class=hljs-number >28</span>), conv_param={<span class=hljs-string >&#x27;filter_num&#x27;</span>:<span class=hljs-number >30</span>, <span class=hljs-string >&#x27;filter_size&#x27;</span>:<span class=hljs-number >5</span>, <span class=hljs-string >&#x27;pad&#x27;</span>:<span class=hljs-number >0</span>, <span class=hljs-string >&#x27;stride&#x27;</span>:<span class=hljs-number >1</span>},
-                 hidden_size=<span class=hljs-number >100</span>, output_size=<span class=hljs-number >10</span>, weight_init_std=<span class=hljs-number >0.01</span>):
+    <span class=hljs-keyword >def</span> <span class="hljs-title function_">__init__</span>(<span class=hljs-params >self, input_dim=(<span class=hljs-params ><span class=hljs-number >1</span>, <span class=hljs-number >28</span>, <span class=hljs-number >28</span></span>), conv_param={<span class=hljs-string >&#x27;filter_num&#x27;</span>:<span class=hljs-number >30</span>, <span class=hljs-string >&#x27;filter_size&#x27;</span>:<span class=hljs-number >5</span>, <span class=hljs-string >&#x27;pad&#x27;</span>:<span class=hljs-number >0</span>, <span class=hljs-string >&#x27;stride&#x27;</span>:<span class=hljs-number >1</span>},
+                 hidden_size=<span class=hljs-number >100</span>, output_size=<span class=hljs-number >10</span>, weight_init_std=<span class=hljs-number >0.01</span></span>):
         filter_num = conv_param[<span class=hljs-string >&#x27;filter_num&#x27;</span>]        
         filter_size = conv_param[<span class=hljs-string >&#x27;filter_size&#x27;</span>]
         filter_pad = conv_param[<span class=hljs-string >&#x27;pad&#x27;</span>]
@@ -2462,7 +2462,7 @@ plt.show()</code></pre>
 </ul>
 <div class=page-foot >
   <div class=copyright >
-    &copy; kyokke. Last modified: July 05, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
+    &copy; kyokke. Last modified: September 27, 2021. Website built with <a href="https://github.com/tlienart/Franklin.jl">Franklin.jl</a> and the <a href="https://julialang.org">Julia programming language</a>.
   </div>
 </div>
 </div>
